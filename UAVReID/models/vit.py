@@ -1,3 +1,5 @@
+###### This is an edited version of Ross Wightman's ViT code to fit the Torchreid framework.
+
 
 import torch
 import torch.nn as nn
