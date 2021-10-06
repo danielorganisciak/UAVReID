@@ -1,0 +1,43 @@
+model:
+  name: 'vit_base_patch16_224'
+  pretrained: True
+
+data:
+  type: 'image'
+  sources: ['temporallynear']
+  targets: ['temporallynear']
+  height: 224
+  width: 224
+  transforms: ['random_flip', 'random_crop', 'random_erase']
+  save_dir: 'log/temporallynear'
+
+cuhk03:
+  classic_split: True
+
+loss:
+  name: 'triplet'
+  softmax:
+    label_smooth: True
+  triplet:
+    weight_t: 0.5
+    weight_x: 0.5
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0003
+  max_epoch: 50
+  batch_size: 16
+  fixbase_epoch: 0
+  open_layers: []
+  lr_scheduler: 'single_step'
+  stepsize: [20]
+
+
+test:
+  batch_size: 100
+  dist_metric: 'euclidean'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 2
+  rerank: False
+  visrank: False
